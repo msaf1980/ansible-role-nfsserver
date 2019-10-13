@@ -1,0 +1,9 @@
+# NFS shares
+#
+# {{ ansible_managed }}
+{% for export in nfsserver_exports %}
+{{ export.name }} {{ export.options }}
+{% endfor %}
+{% for image in pxeserver_images %}
+{{ pxeserver_path }}/{{ image.name }}/rootfs *(ro,async,no_root_squash)
+{% endfor %}

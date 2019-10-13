@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  vars:
+    pxeserver_images:
+      - name: centos7_x86_64
+        default: true
+        kernel_url: http://ftp.belnet.be/ftp.centos.org/7/os/x86_64/isolinux/vmlinuz
+        initrd_url: http://ftp.belnet.be/ftp.centos.org/7/os/x86_64/isolinux/initrd.img
+        label: CentOS 7 x86_64
+
+  roles:
+    - nfsserver

@@ -1,0 +1,11 @@
+# roles/nfsserver/vars/main.yml
+---
+
+nfsserver_packages:
+  - nfs-utils
+
+nfsserver_services:
+  - nfs-server
+  - nfs-idmapd
+  - rpcbind
+  - rpc-statd

@@ -1,0 +1,11 @@
+# roles/pxeserver/handlers/main.yml
+#---
+
+- name: restart nfs
+  service:
+    name: nfs-server
+    state: restarted
+  notify: check nfs
+
+- name: check nfs
+  command: service nfs-server status

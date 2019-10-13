@@ -1,0 +1,30 @@
+# roles/pxeserver/tasks/main.yml
+---
+
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+  tags: nfsserver, config
+
+- name: Install packages
+  package:
+    name: "{{ item }}"
+    state: installed
+  with_items: "{{ nfsserver_packages }}"
+  tags: nfsserver
+
+- name: Ensure services are started
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  with_items: "{{ nfsserver_services }}"
+  tags: nfsserver, config
+
+- name: Create NFS exports file
+  template:
+    src: etc_exports
+    dest: /etc/exports
+  notify: restart nfs
+  tags: nfsserver, config

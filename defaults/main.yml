@@ -1,0 +1,4 @@
+# roles/nfsserver/defaults/main.yml
+---
+pxeserver_images: []
+nfsserver_exports: []
